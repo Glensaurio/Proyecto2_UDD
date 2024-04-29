@@ -71,29 +71,29 @@ crearEncuesta("Encuesta", [
 ]);
 
 
-// Votación usuario 1
-votar("Encuesta", 0, 1);
-votar("Encuesta", 1, 1);
-votar("Encuesta", 2, 1);
-votar("Encuesta", 3, 1);
-votar("Encuesta", 4, 1);
-votar("Encuesta", 5, 1);
-votar("Encuesta", 6, 1);
-votar("Encuesta", 7, 1);
 
 
 
-// Votación usuario 2
-votar("Encuesta", 0, 0);
-votar("Encuesta", 1, 2);
-votar("Encuesta", 2, 1);
-votar("Encuesta", 3, 1);
-votar("Encuesta", 4, 0);
-votar("Encuesta", 5, 1);
-votar("Encuesta", 6, 0);
-votar("Encuesta", 7, 1);
+function iniciarVotacion() {
+  let tituloEncuesta = prompt("Ingrese el título de la encuesta que desea responder:");
+  const encuesta = encuestas.find(e => e.titulo === tituloEncuesta);
+  if (!encuesta) {
+    alert("Encuesta no encontrada. Asegúrate de que el título sea correcto.");
+    return;
+  }
 
+  alert(`Comenzando la encuesta: ${encuesta.titulo}`);
+  encuesta.preguntas.forEach((pregunta, indexPregunta) => {
+    let opcionesTexto = pregunta.opciones.map((opcion, index) => `${index + 1}. ${opcion}`).join('\n');
+    let respuesta = parseInt(prompt(`Pregunta ${indexPregunta + 1}: ${pregunta.pregunta}\n${opcionesTexto}\nElige el número de tu respuesta:`));
+    if (respuesta && respuesta > 0 && respuesta <= pregunta.opciones.length) {
+      votar(tituloEncuesta, indexPregunta, respuesta - 1);
+      alert("Tu voto ha sido registrado.");
+    } else {
+      alert("Respuesta no válida. Inténtalo de nuevo.");
+    }
+  });
 
-mostrarResultados("Encuesta");
-
+  mostrarResultados(tituloEncuesta);
+}
 

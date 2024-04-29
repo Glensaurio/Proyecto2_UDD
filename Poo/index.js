@@ -34,8 +34,34 @@ class GestionEncuestas {
     this.encuestas.push(nuevaEncuesta);
     console.log(`Encuesta '${titulo}' creada con éxito.`);
   }
-}
 
+  encontrarEncuesta(tituloEncuesta) {
+    return this.encuestas.find(encuesta => encuesta.titulo === tituloEncuesta);
+  }
+
+  iniciarVotacion() {
+    let tituloEncuesta = prompt("Ingrese el título de la encuesta que desea responder:");
+    const encuesta = this.encontrarEncuesta(tituloEncuesta);
+    if (!encuesta) {
+      alert("Encuesta no encontrada. Asegúrate de que el título sea correcto.");
+      return;
+    }
+
+    alert(`Comenzando la encuesta: ${encuesta.titulo}`);
+    encuesta.preguntas.forEach((pregunta, indexPregunta) => {
+      let opcionesTexto = pregunta.opciones.map((opcion, index) => `${index + 1}. ${opcion}`).join('\n');
+      let respuesta = parseInt(prompt(`Pregunta ${indexPregunta + 1}: ${pregunta.pregunta}\n${opcionesTexto}\nElige el número de tu respuesta:`));
+      if (respuesta && respuesta > 0 && respuesta <= pregunta.opciones.length) {
+        encuesta.votar(indexPregunta, respuesta - 1);
+        alert("Tu voto ha sido registrado.");
+      } else {
+        alert("Respuesta no válida. Inténtalo de nuevo.");
+      }
+    });
+
+    encuesta.mostrarResultados();
+  }
+}
 
 const encuestaTotal = [
   {
@@ -74,27 +100,3 @@ const encuestaTotal = [
 
 const gestion = new GestionEncuestas();
 gestion.crearEncuesta("Encuesta", encuestaTotal);
-
-//Votación Usuario 1
-gestion.encuestas[0].votar(0, 1);
-gestion.encuestas[0].votar(1, 1);
-gestion.encuestas[0].votar(2, 1);
-gestion.encuestas[0].votar(3, 1);
-gestion.encuestas[0].votar(4, 1);
-gestion.encuestas[0].votar(5, 1);
-gestion.encuestas[0].votar(6, 1);
-gestion.encuestas[0].votar(7, 1);
-
-//Votación Usuario 2
-gestion.encuestas[0].votar(0, 1);
-gestion.encuestas[0].votar(1, 1);
-gestion.encuestas[0].votar(2, 1);
-gestion.encuestas[0].votar(3, 1);
-gestion.encuestas[0].votar(4, 1);
-gestion.encuestas[0].votar(5, 1);
-gestion.encuestas[0].votar(6, 1);
-gestion.encuestas[0].votar(7, 1);
-
-gestion.encuestas[0].mostrarResultados();
-
-

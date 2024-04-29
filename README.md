@@ -24,14 +24,12 @@ Para utilizar este proyecto, simplemente clona el repositorio y abre los archivo
 
 
 ### Uso
-Crear una Encuesta
-Para crear una encuesta, debes llamar a la función crearEncuesta con el título de la encuesta y un arreglo de preguntas y opciones.
+Crear una Encuesta.
+Para crear una encuesta debes escribir "Encuesta" en el pop up emergente en el browser.
 
 ### Votar
-Para votar, usa la función votar proporcionando el título de la encuesta, el índice de la pregunta y el índice de la opción elegida.
-En el caso del archivo POO "gestion.encuestas[0].votar(0, 1);" dentro del parentesis el primer parámetro la pregunta a responder en el arreglo y el segungo respuesta a escoger.
-En el caso del archivo PF "votar("Encuesta", 0, 1);" entro del parentesis el primer parámetro la pregunta a responder en el arreglo y el segundo respuesta a escoger.
+Solo elegir número de la respuesta deseada.
 
 ### Mostrar Resultados
-Para ver los resultados, llama a la función mostrarResultados con el título de la encuesta.
+En la consola saldrán los resultados.
 
